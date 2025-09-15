@@ -6,15 +6,15 @@ This repository contains the implementation of a two-stage metamodeling framewor
 
 The method integrates:
 1. **Multi-Output Gaussian Process Regression (MO–GPR):**  
-   - Incorporates spatial (county centroids) and contextual features (population size, overdose trends, dispensing rates).  
+   - Incorporates spatial (county centroids) and socio-economic features (population size, overdose trends, dispensing rates).  
    - Uses composite kernels (RBF + periodic components).  
    - Produces posterior mean and variance for intervention effect coefficients.
 
 2. **Response Function:**  
    - Approximates overdose mortality outcomes as:  
-     \[
+     $$
      z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b.
-     \]  
+     $$  
    - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
 
 3. **Sequential Design:**  
