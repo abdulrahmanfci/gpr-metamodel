@@ -1,6 +1,6 @@
-# Two-level Gaussian Process Regression – Linear Response Metamodel for epidemic Intervention Simulation
+# Two-level Gaussian Process Regression – Linear Response Metamodel for Epidemic Intervention Simulation
 
-This repository contains the implementation of a two-stage metamodeling framework developed for county-level opioid epidemic simulations in Pennsylvania. The framework approximates outputs of a large-scale agent-based model (FRED) under varying intervention dispensing rates of naloxone and buprenorphine.
+This repository contains the implementation of a two-level metamodeling framework developed for county-level opioid epidemic simulations in Pennsylvania. The framework approximates outputs of a large-scale agent-based model (FRED) under varying intervention dispensing rates of naloxone and buprenorphine.
 
 ## Overview
 
@@ -37,7 +37,7 @@ The experiments in this repository are based on simulation outputs from a calibr
 - **Simulation outputs:** County-level overdose mortality counts and rates under each intervention combination.  
 - **Calibration:** Six representative counties (Allegheny, Philadelphia, Dauphin, Erie, Columbia, and Clearfield) were first calibrated to historical overdose mortality data, and the remaining counties were assigned to one of these prototypes based on demographic and epidemic similarity.  
 
-These calibrated simulations form the input data for the two-stage metamodeling framework (MO–GPR followed by a linear response surface), which approximates outcomes for all county–treatment combinations.
+These calibrated simulations form the input data for the two-level metamodeling framework (MO–GPR followed by a linear response surface), which approximates outcomes for all county–treatment combinations.
 
 
 ## Notebook Structure
@@ -45,7 +45,7 @@ These calibrated simulations form the input data for the two-stage metamodeling 
 - **Data Preprocessing:** Load calibrated county simulations and prepare feature sets.  
 - **GPR-RF:** Fit and update MO–GPR using BoTorch.  
 - **Sequential Design Loop:** Select counties and treatment conditions to simulate.  
-- **Response Stage:** Estimate intervention coefficients from GPR posteriors.  
+- **Response Level:** Estimate intervention coefficients from GPR posteriors.  
 - **Results & Visualization:** Generate comparison plots across counties and treatment strategies.
 
 ## Dependencies
