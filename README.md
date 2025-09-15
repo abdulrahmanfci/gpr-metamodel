@@ -12,9 +12,7 @@ The method integrates:
 
 2. **Response Function:**  
    - Approximates overdose mortality outcomes as:  
-     $$
-     z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b.
-     $$  
+     $$ z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b. $$  
    - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
 
 3. **Sequential Design:**  
