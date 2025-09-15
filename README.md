@@ -6,19 +6,39 @@ This repository contains the implementation of a two-stage metamodeling framewor
 
 The method integrates:
 1. **Multi-Output Gaussian Process Regression (MO–GPR):**  
-   - Incorporates spatial (county centroids) and socio-economic features (population size, overdose trends, dispensing rates).  
+   - Incorporates spatial (county centroids) and socio-economic features (population density, median income, black residents percentage).  
    - Uses composite kernels (RBF + periodic components).  
    - Produces posterior mean and variance for intervention effect coefficients.
 
 2. **Response Function:**  
    - Approximates overdose mortality outcomes as:  
-     $$ z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b. $$  
+     ```math
+     z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b.
+     ```  
    - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
 
 3. **Sequential Design:**  
    - Allocates simulation runs adaptively across counties and treatments.  
-   - Uses a signal-to-noise acquisition rule to prioritize informative simulations.  
+   - Uses a signal-to-noise ratio acquisition rule to prioritize informative simulations.  
    - Iteratively updates the metamodel after each simulation batch.
+  
+## Data Description
+
+The experiments in this repository are based on simulation outputs from a calibrated agent-based model of the opioid epidemic in Pennsylvania.  
+
+- **Geographic scope:** All 67 counties in Pennsylvania.  
+- **Interventions modeled (dispensing rates):**  
+  - **Naloxone (overdose reversal/harm reduction):**  
+    Naloxone is a short-acting opioid antagonist that rapidly reverses overdoses. In the model, naloxone intervention levels correspond to different county-level dispensing rates of naloxone kits.  
+  - **Buprenorphine (treatment for opioid use disorder):**  
+    Buprenorphine is a partial opioid agonist that reduces cravings and withdrawal symptoms. It is used as a maintenance treatment to mitigate the long-term burden of opioid use disorder. In the model, buprenorphine intervention levels correspond to different county-level dispensing rates of buprenorphine prescriptions.  
+
+- **Treatment grid:** Each intervention is varied over **five discrete dispensing rate levels**, resulting in a **5 × 5 grid** (25 total treatment conditions).  
+- **Simulation outputs:** County-level overdose mortality counts and rates under each intervention combination.  
+- **Calibration:** Six representative counties (Allegheny, Philadelphia, Dauphin, Erie, Columbia, and Clearfield) were first calibrated to historical overdose mortality data, and the remaining counties were assigned to one of these prototypes based on demographic and epidemic similarity.  
+
+These calibrated simulations form the input data for the two-stage metamodeling framework (MO–GPR followed by a linear response surface), which approximates outcomes for all county–treatment combinations.
+
 
 ## Notebook Structure
 
