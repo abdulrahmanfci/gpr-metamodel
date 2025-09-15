@@ -1,5 +1,41 @@
-# GPR-RF metamodel
-This repository contains the code used to build the metamodel and generate the plots presented in the paper.
+# Two-level Gaussian Process Regression – Linear Response Metamodel for epidemic Intervention Simulation
 
-# Abstract
-Epidemiological models are widely used to study population-level health dynamics, and population-scale agent-based simulations have proven particularly effective in capturing the complex interactions between individual behaviors and environmental factors. However, as the number of candidate interventions, $N$, and their levels, $\ell$, grow, the computational cost of exploring the resulting exponential treatment-condition space, $\ell^N$, becomes exhaustive. In this paper, we develop a two‐level metamodel framework, comprising a Gaussian process regression (GPR) metamodel followed by a response function, to efficiently estimate county‐level treatment effects on overdose deaths per 100,000 people. In level one, we train a GPR on a sample set of simulation output, learning a smooth mapping from intervention parameters to simulated outcome for each county. To ensure robust performance, we engineered input features, including demographic and socioeconomic covariates, and employed a composite kernel that combines a radial basis function (RBF) component for smooth variation with a periodic component to capture the spatial structure of counties. In level two, the posterior means of the GPR are combined through a response function to generate outcome (i.e., overdose death rate) estimates for a given treatment condition. Using a modest training set, our two‐level metamodel achieves low relative error averaged across all treatment conditions and counties. This approach enables the rapid evaluation of intervention scenarios while significantly reducing computational time and resource requirements. This framework offers a practical decision-support tool for policymakers, enabling rapid evaluation of alternative resource allocation strategies and guiding more efficient investment in public health interventions for epidemics such as opioid use disorder.
+This repository contains the implementation of a two-stage metamodeling framework developed for county-level opioid epidemic simulations in Pennsylvania. The framework approximates outputs of a large-scale agent-based model (FRED) under varying intervention dispensing rates of naloxone and buprenorphine.
+
+## Overview
+
+The method integrates:
+1. **Multi-Output Gaussian Process Regression (MO–GPR):**  
+   - Incorporates spatial (county centroids) and contextual features (population size, overdose trends, dispensing rates).  
+   - Uses composite kernels (RBF + periodic components).  
+   - Produces posterior mean and variance for intervention effect coefficients.
+
+2. **Response Function:**  
+   - Approximates overdose mortality outcomes as:  
+     \[
+     z(n,b \mid c) = \mu_0(\mathbf{x}_c) + \mu_n(\mathbf{x}_c) \cdot n + \mu_b(\mathbf{x}_c) \cdot b.
+     \]  
+   - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
+
+3. **Sequential Design:**  
+   - Allocates simulation runs adaptively across counties and treatments.  
+   - Uses a signal-to-noise acquisition rule to prioritize informative simulations.  
+   - Iteratively updates the metamodel after each simulation batch.
+
+## Notebook Structure
+
+- **Data Preprocessing:** Load calibrated county simulations and prepare feature sets.  
+- **GPR-RF:** Fit and update MO–GPR using BoTorch.  
+- **Sequential Design Loop:** Select counties and treatment conditions to simulate.  
+- **Response Stage:** Estimate intervention coefficients from GPR posteriors.  
+- **Results & Visualization:** Generate comparison plots across counties and treatment strategies.
+
+## Dependencies
+
+- Python 3.10+  
+- [BoTorch](https://botorch.org/)  
+- PyTorch  
+- NumPy, Pandas, Matplotlib  
+
+## Citation
+Please cite our work:
