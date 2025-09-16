@@ -4,6 +4,24 @@ This repository contains the implementation of a two-level metamodeling framewor
 
 ## Overview
 
+## Gaussian Process Regression (Background)
+
+Gaussian Process Regression (GPR) is a Bayesian nonparametric method for learning functions from data.  
+Instead of assuming a fixed functional form, GPR places a prior distribution directly over possible functions, defined by a **mean function** and a **kernel (covariance) function**.  
+
+For a set of training data points, GPR computes a posterior distribution over functions that balance two sources of information:
+- **Prior knowledge** encoded in the kernel (e.g., smoothness, periodicity).
+- **Observed simulation outputs** from county–treatment experiments.  
+
+This results in predictions that include both a **posterior mean** (the most likely function value) and a **posterior variance** (uncertainty about that value).  
+
+In our framework:
+- The GPR is **multi-output (MO–GPR)**, jointly modeling the overdose mortality and the effects of naloxone and buprenorphine.  
+- The kernel is a **composite structure** (multiple RBF components plus a periodic term), which allows the model to capture both smooth spatial variation and recurrent patterns in county-level features.  
+- The posterior mean function $\mathbf{\mu(x_c)} = \[\mu_0(\mathbf{x}_c), \ \mu_n(\mathbf{x}_c), \ \mu_b(\mathbf{x}_c)\]^{\top}$ represent regression coefficients for county $c$, while the posterior variances quantify uncertainty due to limited simulation runs.  
+
+This stage provides a flexible statistical surrogate for the simulation model, enabling efficient exploration of the treatment space before the response function stage is applied.
+
 The method integrates:
 1. **Multi-Output Gaussian Process Regression (MO–GPR):**  
    - Incorporates spatial (county centroids) and socio-economic features (population density, median income, black residents percentage).  
