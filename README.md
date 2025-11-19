@@ -17,7 +17,8 @@ This results in predictions that include both a **posterior mean** (the most lik
 
 In our framework:
 - The GPR is **multi-output (MO–GPR)**, jointly modeling the overdose mortality and the effects of naloxone and buprenorphine.  
-- The kernel is a **composite structure** (multiple RBF components plus a periodic term), which allows the model to capture both smooth spatial variation and recurrent patterns in county-level features.  
+- The kernel is a **composite structure** (multiple RBF components plus a periodic term), which allows the model to capture both smooth spatial variation and recurrent patterns in county-level features.
+- The MO–GPR uses a heteroscedastic noise model, where the observation variance for each coefficient depends on the sample variance and the number of simulation replicates for each county. This allows the model to weight counties according to the precision implied by their corresponding simulation samples, rather than assuming a constant noise level across all outputs.
 - The posterior mean function $\mathbf{\mu(x_c)} = \[\mu_0(\mathbf{x}_c), \ \mu_n(\mathbf{x}_c), \ \mu_b(\mathbf{x}_c)\]^{\top}$ represent regression coefficients for county $c$, while the posterior variances quantify uncertainty due to limited simulation runs.  
 
 This stage provides a flexible statistical surrogate for the simulation model, enabling efficient exploration of the treatment space before the response function stage is applied.
@@ -27,6 +28,7 @@ The method integrates:
    - Incorporates spatial (county centroids) and socio-economic features (population density, median income, black residents percentage).  
    - Uses composite kernels (RBF + periodic components).  
    - Produces posterior mean and variance for intervention effect coefficients.
+   - Heteroscedastic model
 
 2. **Response Function:**  
    - Approximates overdose mortality outcomes as:  
