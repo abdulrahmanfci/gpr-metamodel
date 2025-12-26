@@ -13,20 +13,20 @@ For a set of training data points, GPR computes a posterior distribution over fu
 - **Prior knowledge** encoded in the kernel (e.g., smoothness, periodicity).
 - **Observed simulation outputs** from county–treatment experiments.  
 
-This results in predictions that include both a **posterior mean** (the most likely function value) and a **posterior variance** (uncertainty about that value).  
+This yields predictions that include both mean (the most likely function value) and variance (uncertainty around that value) for each county.  
 
 In our framework:
-- The GPR is **multi-output (MO–GPR)**, jointly modeling the overdose mortality and the effects of naloxone and buprenorphine.  
-- The kernel is a **composite structure** (multiple RBF components plus a periodic term), which allows the model to capture both smooth spatial variation and recurrent patterns in county-level features.
-- The MO–GPR uses a heteroscedastic noise model, where the observation variance for each coefficient depends on the sample variance and the number of simulation replicates for each county. This allows the model to weight counties according to the precision implied by their corresponding simulation samples, rather than assuming a constant noise level across all outputs.
-- The posterior mean function $\mathbf{\mu(x_c)} = \[\mu_0(\mathbf{x}_c), \ \mu_n(\mathbf{x}_c), \ \mu_b(\mathbf{x}_c)\]^{\top}$ represent regression coefficients for county $c$, while the posterior variances quantify uncertainty due to limited simulation runs.  
+- We model baseline overdose mortality and the effects of naloxone and buprenorphine using three independent GPRs defined over the same county-level feature space.  
+- The kernel is a **composite structure** (multiple RBF), which allows the model to capture both smooth spatial variation and patterns in county-level features.
+- The GPR uses a heteroscedastic noise model, where the observation variance for each coefficient depends on the sample variance and the number of simulation replicates for each county. This allows the model to weight counties according to the precision implied by their corresponding simulation samples, rather than assuming a constant noise level across all outputs.
+- The mean function $\mathbf{\mu(x_c)} = \[\mu_0(\mathbf{x}_c), \ \mu_n(\mathbf{x}_c), \ \mu_b(\mathbf{x}_c)\]^{\top}$ represent regression coefficients for county $c$, while the variances quantify uncertainty due to limited simulation runs.  
 
 This stage provides a flexible statistical surrogate for the simulation model, enabling efficient exploration of the treatment space before the response function stage is applied.
 
 The method integrates:
-1. **Multi-Output Gaussian Process Regression (MO–GPR):**  
+1. **Gaussian Process Regression (GPR):**  
    - Incorporates spatial (county centroids) and socio-economic features (population density, median income, black residents percentage).  
-   - Uses composite kernels (RBF + periodic components).  
+   - Uses composite kernels (RBF).  
    - Produces posterior mean and variance for intervention effect coefficients.
    - Heteroscedastic model
 
@@ -63,7 +63,7 @@ These calibrated simulations form the input data for the two-level metamodeling 
 ## Notebook Structure
 
 - **Data Preprocessing:** Load calibrated county simulations and prepare feature sets.  
-- **GPR-RF:** Fit and update MO–GPR using BoTorch.  
+- **GPR-RF:** Fit and update GPR using BoTorch.  
 - **Sequential Design Loop:** Select counties and treatment conditions to simulate.  
 - **Response Level:** Estimate intervention coefficients from GPR posteriors.  
 - **Results & Visualization:** Generate comparison plots across counties and treatment strategies.
