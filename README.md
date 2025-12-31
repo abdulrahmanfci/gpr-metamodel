@@ -1,6 +1,6 @@
 # Two-level Gaussian Process Regression – Linear Response Metamodel for Epidemic Intervention Simulation
 
-This repository contains the implementation of a two-level metamodeling framework developed for county-level opioid epidemic simulations in Pennsylvania. The framework approximates outputs of a large-scale agent-based model (FRED) under varying intervention dispensing rates of naloxone and buprenorphine.
+This repository contains the implementation of a two-level metamodeling framework developed for county-level opioid epidemic simulations in Pennsylvania. The framework approximates outputs of a large-scale agent-based model (FRED) across varying intervention dispensing rates of naloxone and buprenorphine.
 
 ## Overview
 
@@ -38,9 +38,11 @@ The method integrates:
    - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
 
 3. **Sequential Design:**  
-   - Allocates simulation runs adaptively across counties and treatments.  
-   - Uses a signal-to-noise ratio acquisition rule to prioritize informative simulations.  
-   - Iteratively updates the metamodel after each simulation batch.
+   Allocates simulation runs adaptively across counties and treatments.
+   **Stage 1:** Uses signal-to-noise ratio (SNR) acquisition to select counties: $\alpha_{\text{SNR}}(c) = \sigma / \mu$.
+   **Stage 2:** Selects treatment conditions with the widest 95% credible interval within each county.
+   <!--- Uses a signal-to-noise ratio acquisition rule to prioritize informative simulations.  
+   - Iteratively updates the metamodel after each simulation batch. -->
   
 ## Data Description
 
@@ -62,11 +64,11 @@ These calibrated simulations form the input data for the two-level metamodeling 
 
 ## Notebook Structure
 
-- **Data Preprocessing:** Load calibrated county simulations and prepare feature sets.  
-- **GPR-RF:** Fit and update GPR using BoTorch.  
-- **Sequential Design Loop:** Select counties and treatment conditions to simulate.  
-- **Response Level:** Estimate intervention coefficients from GPR posteriors.  
-- **Results & Visualization:** Generate comparison plots across counties and treatment strategies.
+- **Section 1 - Data Preprocessing:** Load calibrated county simulations and prepare feature sets.
+- **Section 2 - GPR Configuration:** Configure kernel design and build training data (`train_X`, `train_Y`).
+- **Section 3 - Sequential Design:** Implement SNR acquisition (Algorithm 1) and widest CI selection (Algorithm 2).
+- **Section 4 - Main Training Loop:** Fit and update GPR using BoTorch, select counties and treatment conditions iteratively.
+- **Section 5 - Results & Visualization:** Generate PA maps, learning curves, and posterior coefficient plots (Figures 2-4).
 
 ## Dependencies
 
