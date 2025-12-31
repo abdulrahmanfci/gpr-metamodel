@@ -38,9 +38,9 @@ The method integrates:
    - Provides interpretable coefficients for naloxone and buprenorphine effects at the county level.
 
 3. **Sequential Design:**  
-   Allocates simulation runs adaptively across counties and treatments.
-   **Stage 1:** Uses signal-to-noise ratio (SNR) acquisition to select counties: $\alpha_{\text{SNR}}(c) = \sigma / \mu$.
-   **Stage 2:** Selects treatment conditions with the widest 95% credible interval within each county.
+   - Allocates simulation runs adaptively across counties and treatments.
+   - **Stage 1:** Uses signal-to-noise ratio (SNR) acquisition to select counties: $\alpha_{\text{SNR}}(c) = \sigma / \mu$.
+   - **Stage 2:** Selects treatment conditions with the widest 95% credible interval within each county.
    <!--- Uses a signal-to-noise ratio acquisition rule to prioritize informative simulations.  
    - Iteratively updates the metamodel after each simulation batch. -->
   
