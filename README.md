@@ -76,4 +76,4 @@ These calibrated simulations form the input data for the two-level metamodeling 
 - NumPy, Pandas, Matplotlib  
 
 ## Citation
-Please cite our work:
+Please cite our work: [Details omitted for anonymous review]
