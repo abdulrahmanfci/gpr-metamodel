@@ -77,7 +77,7 @@ These calibrated simulations form the input data for the two-level metamodeling 
 - **Section 2 - GPR Configuration:** Configure kernel design and build training data (`train_X`, `train_Y`).
 - **Section 3 - Sequential Design:** Implement SNR acquisition (Algorithm 1) and widest CI selection (Algorithm 2).
 - **Section 4 - Main Training Loop:** Fit and update GPR using BoTorch, select counties and treatment conditions iteratively.
-- **Section 5 - Results & Visualization:** Generate PA maps, learning curves, and posterior coefficient plots (Figures 2-4).
+- **Section 5 - Results & Visualization:** Generate PA maps, learning curves, and posterior coefficient plots (Figures 2-5).
 
 
 ## OUD Model Calibration
