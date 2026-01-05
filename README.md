@@ -42,6 +42,18 @@ The method integrates:
    - **Stage 1:** Uses signal-to-noise ratio (SNR) acquisition to select counties: $\alpha_{\text{SNR}}(c) = \sigma / \mu$.
    - **Stage 2:** Selects treatment conditions with the widest 95% credible interval within each county.
   
+## Repository Structure
+```
+├── notebooks/
+│   └── GP_OUD_PA_int25_3par_hetero.ipynb   # Main GPR metamodel notebook
+├── calibration/
+│   ├── calibration_pa.R                     # OUD Markov model and likelihood
+│   ├── imis_calibration.R                   # IMIS posterior estimation
+│   └── README.md                            # Calibration documentation
+├── resources/
+│   └── data_pa_int_XY.csv                   # FRED simulation outputs (X,Y = 1-5)
+└── README.md
+```
 ## Data Description
 
 The experiments in this repository are based on simulation outputs from a calibrated agent-based model of the opioid epidemic in Pennsylvania.  
@@ -67,6 +79,44 @@ These calibrated simulations form the input data for the two-level metamodeling 
 - **Section 3 - Sequential Design:** Implement SNR acquisition (Algorithm 1) and widest CI selection (Algorithm 2).
 - **Section 4 - Main Training Loop:** Fit and update GPR using BoTorch, select counties and treatment conditions iteratively.
 - **Section 5 - Results & Visualization:** Generate PA maps, learning curves, and posterior coefficient plots (Figures 2-4).
+
+
+## OUD Model Calibration
+
+The `calibration/` folder contains R scripts for calibrating the Opioid Use Disorder (OUD) Markov model using Incremental Mixture Importance Sampling (IMIS). The calibration process estimates 7 transition probability parameters by matching simulated overdose death rates to observed county-level mortality data from 2015-2019.
+
+### Calibration Files
+
+| File | Description |
+|------|-------------|
+| `calibration_pa.R` | Defines the OUD Markov model, parameter bounds, likelihood function, and PSA |
+| `imis_calibration.R` | Runs IMIS algorithm to obtain posterior parameter estimates |
+
+### Calibration Workflow
+```
+┌─────────────────────────────────┐
+│  calibration_pa.R               │
+│  ─────────────────────────────  │
+│  1. Define parameter bounds     │
+│  2. Define OUD Markov model     │
+│  3. Define likelihood function  │
+│  4. Run initial PSA             │
+└───────────────┬─────────────────┘
+                │
+                ▼
+┌─────────────────────────────────┐
+│  imis_calibration.R             │
+│  ─────────────────────────────  │
+│  1. Define prior distribution   │
+│  2. Run IMIS algorithm          │
+│  3. Sample from posterior       │
+│  4. Evaluate model fit          │
+│  5. Export calibrated params    │
+└─────────────────────────────────┘
+```
+
+For detailed calibration instructions, see [`calibration/README.md`](calibration/README.md).
+
 
 ## Dependencies
 
