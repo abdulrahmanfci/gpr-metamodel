@@ -16,7 +16,7 @@ The calibration process estimates 7 transition probability parameters by matchin
 ## Workflow
 ```
 ┌─────────────────────────────────┐
-│  oud_calibration_model.R        │
+│  calibration_pa.R               │
 │  ─────────────────────────────  │
 │  1. Define parameter bounds     │
 │  2. Define OUD Markov model     │
@@ -26,7 +26,7 @@ The calibration process estimates 7 transition probability parameters by matchin
                 │
                 ▼
 ┌─────────────────────────────────┐
-│  oud_imis_calibration.R         │
+│  imis_calibration.R             │
 │  ─────────────────────────────  │
 │  1. Define prior distribution   │
 │  2. Run IMIS algorithm          │
@@ -40,7 +40,7 @@ The calibration process estimates 7 transition probability parameters by matchin
 
 ### Step 1: Configure County
 
-In `oud_calibration_model.R`, uncomment the parameter bounds and target for your county:
+In `calibration_pa.R`, uncomment the parameter bounds and target for your county:
 ```r
 # --- Allegheny ---
 v1_lower <- matrix(c(-130.40, -25.5, -9.0, 0.3, 0.0, 0.4, 0.6),
@@ -63,10 +63,10 @@ naloxone_dispense_rate <- c(...)
 ### Step 3: Run Calibration
 ```r
 # First, run the model script
-source("oud_calibration_model.R")
+source("calibration_pa.R")
 
 # Then, run IMIS calibration
-source("oud_imis_calibration.R")
+source("imis_calibration.R")
 ```
 
 ### Step 4: Check Outputs
