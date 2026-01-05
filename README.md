@@ -44,8 +44,7 @@ The method integrates:
   
 ## Repository Structure
 ```
-├── notebooks/
-│   └── GP_OUD_PA_int25_3par_hetero.ipynb   # Main GPR metamodel notebook
+├── pa_metamodel.ipynb                       # Main GPR metamodel notebook
 ├── calibration/
 │   ├── calibration_pa.R                     # OUD Markov model and likelihood
 │   ├── imis_calibration.R                   # IMIS posterior estimation
