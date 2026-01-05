@@ -10,8 +10,8 @@ The calibration process estimates 7 transition probability parameters by matchin
 
 | File | Description |
 |------|-------------|
-| `oud_calibration_model.R` | Defines the OUD Markov model, parameter bounds, likelihood function, and PSA |
-| `oud_imis_calibration.R` | Runs IMIS algorithm to obtain posterior parameter estimates |
+| `calibration_pa.R` | Defines the OUD Markov model, parameter bounds, likelihood function, and PSA |
+| `imis_calibration.R` | Runs IMIS algorithm to obtain posterior parameter estimates |
 
 ## Workflow
 ```
