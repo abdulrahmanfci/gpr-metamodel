@@ -135,7 +135,7 @@ arXiv:2601.03105, 2026
 
 ### BibTeX
 ```bibtex
-@misc{ahmed2025computationally,
+@article{ahmed2025computationally,
       title={Computationally Efficient Estimation of Localized Treatment Effects in High-Dimensional Design Spaces using Gaussian Process Regression}, 
       author={Abdulrahman A. Ahmed and M. Amin Rahimian and Qiushi Chen and Praveen Kumar},
       year={2026},
