@@ -130,18 +130,18 @@ If you find this work useful, please cite:
 
 **Computationally Efficient Estimation of Localized Treatment Effects in High-Dimensional Design Spaces using Gaussian Process Regression**  
 Abdulrahman A. Ahmed, M. Amin Rahimian, Qiushi Chen, Praveen Kumar  
-arXiv:2501.03105, 2025  
-[Paper](https://arxiv.org/abs/2501.03105)
+arXiv:2601.03105, 2026  
+[Paper](https://arxiv.org/abs/2601.03105)
 
 ### BibTeX
 ```bibtex
 @misc{ahmed2025computationally,
       title={Computationally Efficient Estimation of Localized Treatment Effects in High-Dimensional Design Spaces using Gaussian Process Regression}, 
       author={Abdulrahman A. Ahmed and M. Amin Rahimian and Qiushi Chen and Praveen Kumar},
-      year={2025},
-      eprint={2501.03105},
+      year={2026},
+      eprint={2601.03105},
       archivePrefix={arXiv},
       primaryClass={stat.AP},
-      url={https://arxiv.org/abs/2501.03105}
+      url={https://arxiv.org/abs/2601.03105}
 }
 ```
